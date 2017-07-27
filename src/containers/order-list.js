@@ -4,12 +4,14 @@ import * as actions from '../actions';
 
 class OrderList extends Component {
 
-  handleClick = function(event){
+  handleNewOrderClick = function(event){
+    console.log('creating a new order', this.props);
     const id = this.props.orders.length+1;
     event.preventDefault();
     this.props.createOrder(id);
 
   }
+
   renderOrderList(){
     if(this.props.orders.length == 0){
       return(<div>Create an Order to Get Started</div>);
@@ -23,8 +25,16 @@ class OrderList extends Component {
                 <span className="total">Total: {order.total}</span>
               </div>
               <div>
-                <button className="btn btn-primary">Fulfill</button>
-                <button className="btn btn-warning">Cancel</button>
+                <button
+                  className="btn btn-primary"
+                  onClick={() => this.props.fulfillOrder(order)}>
+                  Fulfill
+                </button>
+                <button
+                  className="btn btn-warning"
+                  onClick={() => this.props.cancelOrder(order)}>
+                  Cancel
+                </button>
                 <button className="btn btn-secondary">View</button>
               </div>
             </li>
@@ -38,7 +48,7 @@ class OrderList extends Component {
       <div>
       <h3>Open Orders</h3>
         <button
-          onClick={this.handleClick.bind(this)}
+          onClick={this.handleNewOrderClick.bind(this)}
           className="btn btn-primary">
           Create New Order
         </button>

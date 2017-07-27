@@ -35,7 +35,11 @@ class OrderList extends Component {
                   onClick={() => this.props.cancelOrder(order)}>
                   Cancel
                 </button>
-                <button className="btn btn-secondary">View</button>
+                <button
+                  className="btn btn-secondary"
+                  onClick={()=>this.props.selectOrder(order)}>
+                  View
+                </button>
               </div>
             </li>
           );

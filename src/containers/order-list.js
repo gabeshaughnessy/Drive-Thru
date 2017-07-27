@@ -6,10 +6,45 @@ class OrderList extends Component {
 
   handleNewOrderClick = function(event){
     const id = this.props.orders.length+1;
-    event.preventDefault();
     this.props.createOrder(id);
 
   }
+
+  renderMenuItems(items, order){
+    if(items.length > 0){
+      return items.map((item)=>{
+        return (
+          <li
+            className="item menu-item"
+            key={item.name}>
+            <span className="item-name">{item.name}</span>
+            <span className="item-price">{item.price}</span>
+            <button
+              className="btn btn-secondary"
+              onClick={()=>{this.props.addToOrder(item, order)}}>
+              Add to Order
+            </button>
+          </li>
+        );
+      });
+    }
+  }
+  renderOrderItems(order){
+    if(order.items.length == 0 ){
+      return(<div>Add Items to the Order</div>);
+    }else{
+      return order.items.map((item)=>{
+        return (
+          <li
+            className="item order-item"
+            key="item.name">
+            {item.name}
+          </li>
+        );
+      });
+    }
+  }
+
 
   renderOrderList(){
     if(this.props.orders.length == 0){
@@ -19,11 +54,13 @@ class OrderList extends Component {
         if(order.status === 'open'){
           return (
             <li className="order" key={order.id}>
-              <div>
+
+              <div className="order-details">
                 <span className="order-number">Order {order.id}</span>
                 <span className="total">Total: {order.total}</span>
               </div>
-              <div>
+
+              <div className="order-controls">
                 <button
                   className="btn btn-primary"
                   onClick={() => this.props.fulfillOrder(order)}>
@@ -34,12 +71,16 @@ class OrderList extends Component {
                   onClick={() => this.props.cancelOrder(order)}>
                   Cancel
                 </button>
-                <button
-                  className="btn btn-secondary"
-                  onClick={()=>this.props.selectOrder(order)}>
-                  View
-                </button>
               </div>
+              <ul className="order-items">
+                {this.renderOrderItems(order)}
+              </ul>
+              <h3>Add Items</h3>
+              <hr />
+              <ul className="menu-items">
+                {this.renderMenuItems(this.props.menuItems, order)}
+              </ul>
+
             </li>
           );
         }
@@ -66,7 +107,7 @@ function mapStateToProps(state){
 
   return {
     orders: state.orders,
-    activeOrder: state.activeOrder
+    menuItems : state.menuItems
   }
 }
 

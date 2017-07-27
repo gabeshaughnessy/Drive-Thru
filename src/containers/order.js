@@ -17,6 +17,7 @@ class Order extends Component {
           <div className="order-details">
             <span className="order-number">Order {activeOrder.id}</span>
             <span className="total">Total: {activeOrder.total}</span>
+            <span className="total">Status: {activeOrder.status}</span>
           </div>
 
           <ul className="menu-items">

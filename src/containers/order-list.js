@@ -5,7 +5,6 @@ import * as actions from '../actions';
 class OrderList extends Component {
 
   handleNewOrderClick = function(event){
-    console.log('creating a new order', this.props);
     const id = this.props.orders.length+1;
     event.preventDefault();
     this.props.createOrder(id);
@@ -66,7 +65,8 @@ class OrderList extends Component {
 function mapStateToProps(state){
 
   return {
-    orders: state.orders
+    orders: state.orders,
+    activeOrder: state.activeOrder
   }
 }
 

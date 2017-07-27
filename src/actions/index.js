@@ -30,8 +30,6 @@ export function createOrder(id){
 //delete an order
 export function cancelOrder(order){
 
-  order.status = 'canceled';
-
   return {
     type: CANCEL_ORDER,
     payload : order
@@ -40,8 +38,6 @@ export function cancelOrder(order){
 
 //fulfill an order
 export function fulfillOrder(order){
-
-  order.status = 'fulfilled';
 
   return {
     type: FULFILL_ORDER,

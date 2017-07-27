@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import OrderList from '../containers/order-list';
 import Header from './header';
 
 export default class App extends Component {
@@ -6,7 +7,7 @@ export default class App extends Component {
     return (
       <div>
         <Header />
-          {this.props.children}
+        <OrderList />
       </div>
     );
   }

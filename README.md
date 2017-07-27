@@ -27,3 +27,9 @@ A Drive Through Ordering System
   ]
 }
 ```
+### Wireframes
+![orders wireframe](https://github.com/gabeshaughnessy/Drive-Thru/blob/master/wireframes/orders.jpg?raw=true)
+
+![new order wireframe](https://github.com/gabeshaughnessy/Drive-Thru/blob/master/wireframes/new-order.jpg?raw=true)
+
+![edit order wireframe](https://github.com/gabeshaughnessy/Drive-Thru/blob/master/wireframes/edit-order.jpg?raw=true)

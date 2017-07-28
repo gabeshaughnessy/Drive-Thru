@@ -1,6 +1,5 @@
 export const CREATE_ORDER = 'create_order';
-export const CANCEL_ORDER = 'cancel_order';
-export const FULFILL_ORDER = 'fulfill_order';
+export const UPDATE_ORDER = 'update_order';
 export const ADD_ITEM = 'add_item';
 export const REMOVE_ITEM = 'remove_item';
 
@@ -8,7 +7,7 @@ export const REMOVE_ITEM = 'remove_item';
 export function createOrder(id){
   const order = {
     id : id,
-    items : [],
+    items : {},
     total : 0,
     status : 'open'
   }
@@ -18,28 +17,26 @@ export function createOrder(id){
   }
 }
 
-export function addToOrder(item, order){
+//delete or fulfill an order
+
+export function updateOrder(order, status){
+  return {
+    type: UPDATE_ORDER,
+    payload: {order, status}
+  }
+}
+
+export function addItem(order, item){
   return {
     type: ADD_ITEM,
-    payload: {item, order}
+    payload: {order, item}
   }
 }
 
-//delete an order
-export function cancelOrder(order){
-
+export function removeItem(order, item){
   return {
-    type: CANCEL_ORDER,
-    payload : order
-  }
-}
-
-//fulfill an order
-export function fulfillOrder(order){
-
-  return {
-    type: FULFILL_ORDER,
-    payload : order
+    type: REMOVE_ITEM,
+    payload: {order, item}
   }
 }
 //add an item to an order

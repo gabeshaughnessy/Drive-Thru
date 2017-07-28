@@ -5,7 +5,8 @@ import * as actions from '../actions';
 class OrderList extends Component {
 
   handleNewOrderClick = function(event){
-    const id = this.props.orders.length+1;
+    const size = Object.keys(this.props.orders).length;
+    const id = size+1;
     this.props.createOrder(id);
 
   }
@@ -21,7 +22,7 @@ class OrderList extends Component {
             <span className="item-price">{item.price}</span>
             <button
               className="btn btn-secondary"
-              onClick={()=>{this.props.addToOrder(item, order)}}>
+              onClick={()=>{this.props.addItem(order, item)}}>
               Add to Order
             </button>
           </li>
@@ -33,12 +34,19 @@ class OrderList extends Component {
     if(order.items.length == 0 ){
       return(<div>Add Items to the Order</div>);
     }else{
-      return order.items.map((item)=>{
+      return Object.keys(order.items).map((i)=>{
+        const item = order.items[i];
         return (
           <li
             className="item order-item"
-            key="item.name">
-            {item.name}
+            key={item.name}>
+            <span className="item-name">{item.name} - </span>
+            <span className="item-qty">qty: {item.qty}</span>
+            <button
+              className="btn btn-warning"
+              onClick={()=>{this.props.removeItem(order, item);}}>
+              &times;
+            </button>
           </li>
         );
       });
@@ -50,38 +58,39 @@ class OrderList extends Component {
     if(this.props.orders.length == 0){
       return(<div>Create an Order to Get Started</div>);
     }else{
-      return this.props.orders.map((order)=>{
+      const orders = this.props.orders;
+      return Object.keys(orders).map((i)=>{
+        const order = orders[i];
         if(order.status === 'open'){
           return (
-            <li className="order" key={order.id}>
-
-              <div className="order-details">
-                <span className="order-number">Order {order.id}</span>
-                <span className="total">Total: {order.total}</span>
-              </div>
-
+            <div  key={order.id}>
+              <li className="order">
+                <div className="order-details">
+                  <span className="order-number">Order {order.id}</span>
+                  <span className="total">Total: ${order.total}</span>
+                </div>
+              </li>
               <div className="order-controls">
                 <button
                   className="btn btn-primary"
-                  onClick={() => this.props.fulfillOrder(order)}>
+                  onClick={() => this.props.updateOrder(order, 'fulfill')}>
                   Fulfill
                 </button>
                 <button
-                  className="btn btn-warning"
-                  onClick={() => this.props.cancelOrder(order)}>
+                  className="btn btn-danger"
+                  onClick={() => this.props.updateOrder(order, 'canceled')}>
                   Cancel
                 </button>
               </div>
               <ul className="order-items">
-                {this.renderOrderItems(order)}
+               {this.renderOrderItems(order)}
               </ul>
               <h3>Add Items</h3>
               <hr />
               <ul className="menu-items">
                 {this.renderMenuItems(this.props.menuItems, order)}
               </ul>
-
-            </li>
+            </div>
           );
         }
       });

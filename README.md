@@ -11,14 +11,20 @@ A Drive Through Ordering System
 ### App Model:
 ```
 {
-  orders : [
-    {
+  orders : {
+    id: {
       id: String,
       total : Number,
       status : String,
-      items : [{item}, {item}]
+      items : {
+        name: {
+          name : String,
+          price : Number,
+          qty : Number
+        }
+      }
     }
-  ],
+  },
   menuItems : [
     {
       name : String,

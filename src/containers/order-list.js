@@ -59,14 +59,19 @@ class OrderList extends Component {
       return(<div>Create an Order to Get Started</div>);
     }else{
       const orders = this.props.orders;
+      let openOrderCount = 0;
       return Object.keys(orders).map((i)=>{
         const order = orders[i];
         if(order.status === 'open'){
+          openOrderCount++;
+          if(openOrderCount > 4){
+            alert('alert the manager');
+          }
           return (
             <div  key={order.id}>
               <li className="order">
                 <div className="order-details">
-                  <span className="order-number">Order {order.id}</span>
+                  <span className="order-number">Order#: {order.id} </span>
                   <span className="total">Total: ${order.total}</span>
                 </div>
               </li>
@@ -98,8 +103,8 @@ class OrderList extends Component {
   }
   render() {
     return (
-      <div>
-      <h3>Open Orders</h3>
+      <div className="container">
+        <h3>Open Orders</h3>
         <button
           onClick={this.handleNewOrderClick.bind(this)}
           className="btn btn-primary">

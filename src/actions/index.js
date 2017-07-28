@@ -1,6 +1,5 @@
 export const CREATE_ORDER = 'create_order';
-export const DELETE_ORDER = 'delete_order';
-export const FULFILL_ORDER = 'fulfill_order';
+export const UPDATE_ORDER = 'update_order';
 export const VIEW_ORDER = 'view_order';
 export const ADD_ITEM = 'add_item';
 export const REMOVE_ITEM = 'remove_item';
@@ -19,9 +18,15 @@ export function createOrder(id){
   }
 }
 
-//delete an order
+//delete or fulfill an order
 
-//fulfill an order
+export function updateOrder(order, status){
+  return {
+    type: UPDATE_ORDER,
+    payload: {order, status}
+  }
+}
+
 
 //add an item to an order
 

@@ -39,8 +39,9 @@ class OrderList extends Component {
         return (
           <li
             className="item order-item"
-            key="item.name">
-            {item.name}
+            key={item.name}>
+            <span className="item-name">{item.name} - </span>
+            <span className="item-qty">qty: {item.qty}</span>
           </li>
         );
       });

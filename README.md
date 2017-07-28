@@ -38,6 +38,6 @@ A Drive Through Ordering System
 
 
 ### TODO:
-[ ] - update tests
-[ ] - style the app
-[ ] - set up alerts to the manager
+- [ ] update tests
+- [ ] style the app
+- [ ] set up alerts to the manager

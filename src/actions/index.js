@@ -8,7 +8,7 @@ export const REMOVE_ITEM = 'remove_item';
 export function createOrder(id){
   const order = {
     id : id,
-    items : [],
+    items : {},
     total : 0,
     status : 'open'
   }
@@ -24,6 +24,13 @@ export function updateOrder(order, status){
   return {
     type: UPDATE_ORDER,
     payload: {order, status}
+  }
+}
+
+export function addItem(order, item){
+  return {
+    type: ADD_ITEM,
+    payload: {order, item}
   }
 }
 

@@ -22,16 +22,38 @@ export default function(state={}, action){
     break;
 
     case ADD_ITEM :
-      const item = action.payload.item;
-      return state.map((order)=>{
 
-        if(order.id === action.payload.order.id){
-          return update(order, {items : {$push : [item]}});
+      const orderItems = Object.keys(state).map((order)=>{
+
+        if(state[order].id == action.payload.order.id){
+          if(state[order].items.hasOwnProperty(action.payload.item.name)){
+            const item = state[order].items[action.payload.item.name];
+            const updatedQty = update(item, {qty :{$set : item.qty+1 }});
+            const newItems = {};
+            newItems[action.payload.item.name] = updatedQty;
+            const updatedItems = update(state[order].items, {$merge : newItems});
+            const newState = update(state[order], {items : {$merge : updatedItems}});
+            return newState;
+          }else{
+            const newItem = {};
+            const itemName = action.payload.item.name;
+            newItem[itemName] = action.payload.item;
+            newItem[itemName].qty = 1;
+
+          const updatedItems = update(state[order], {items : {$merge : newItem }});
+
+          const newState = Object.assign({}, state[order], updatedItems);
+          return Object.assign({}, state[order], newState);
+          }
         }else{
-          return order;
+          return state[order];
         }
-
       });
+
+
+
+      return orderItems;
+
 
     break;
 

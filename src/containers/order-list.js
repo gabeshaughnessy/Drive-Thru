@@ -22,7 +22,7 @@ class OrderList extends Component {
             <span className="item-price">{item.price}</span>
             <button
               className="btn btn-secondary"
-              onClick={()=>{this.props.addToOrder(item, order)}}>
+              onClick={()=>{this.props.addItem(order, item)}}>
               Add to Order
             </button>
           </li>
@@ -34,7 +34,8 @@ class OrderList extends Component {
     if(order.items.length == 0 ){
       return(<div>Add Items to the Order</div>);
     }else{
-      return order.items.map((item)=>{
+      return Object.keys(order.items).map((i)=>{
+        const item = order.items[i];
         return (
           <li
             className="item order-item"

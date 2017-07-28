@@ -103,7 +103,7 @@ class OrderList extends Component {
   }
   render() {
     return (
-      <div className="container">
+      <div className="container-fluid">
         <h3>Open Orders</h3>
         <button
           onClick={this.handleNewOrderClick.bind(this)}

@@ -35,3 +35,9 @@ A Drive Through Ordering System
 ```
 ### Wireframes
 ![app wireframe](https://github.com/gabeshaughnessy/Drive-Thru/blob/master/wireframes/wireframe.jpg?raw=true)
+
+
+### TODO:
+[ ] - update tests
+[ ] - style the app
+[ ] - set up alerts to the manager

@@ -1,6 +1,5 @@
 export const CREATE_ORDER = 'create_order';
 export const UPDATE_ORDER = 'update_order';
-export const VIEW_ORDER = 'view_order';
 export const ADD_ITEM = 'add_item';
 export const REMOVE_ITEM = 'remove_item';
 
@@ -34,7 +33,12 @@ export function addItem(order, item){
   }
 }
 
-
+export function removeItem(order, item){
+  return {
+    type: REMOVE_ITEM,
+    payload: {order, item}
+  }
+}
 //add an item to an order
 
 //remove an item from an order

@@ -42,6 +42,11 @@ class OrderList extends Component {
             key={item.name}>
             <span className="item-name">{item.name} - </span>
             <span className="item-qty">qty: {item.qty}</span>
+            <button
+              className="btn btn-warning"
+              onClick={()=>{this.props.removeItem(order, item);}}>
+              &times;
+            </button>
           </li>
         );
       });
@@ -72,7 +77,7 @@ class OrderList extends Component {
                   Fulfill
                 </button>
                 <button
-                  className="btn btn-warning"
+                  className="btn btn-danger"
                   onClick={() => this.props.updateOrder(order, 'canceled')}>
                   Cancel
                 </button>

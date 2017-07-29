@@ -55,5 +55,4 @@ npm run test:watch
 
 ### TODO:
 - [ ] update tests
-- [ ] style the app
 - [ ] set up alerts to the manager

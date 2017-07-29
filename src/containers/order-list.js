@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import * as actions from '../actions';
+import _ from 'lodash';
 
 class OrderList extends Component {
 
@@ -19,11 +20,10 @@ class OrderList extends Component {
             className="item menu-item"
             key={item.name}>
             <span className="item-name">{item.name}</span>
-            <span className="item-price">{item.price}</span>
             <button
               className="btn btn-secondary"
               onClick={()=>{this.props.addItem(order, item)}}>
-              Add to Order
+              +
             </button>
           </li>
         );
@@ -31,8 +31,8 @@ class OrderList extends Component {
     }
   }
   renderOrderItems(order){
-    if(order.items.length == 0 ){
-      return(<div>Add Items to the Order</div>);
+    if(!_.some(order.items)){
+      return(<li><h6 className="instructions">Add Items to the Order</h6></li>);
     }else{
       return Object.keys(order.items).map((i)=>{
         const item = order.items[i];
@@ -55,8 +55,8 @@ class OrderList extends Component {
 
 
   renderOrderList(){
-    if(this.props.orders.length == 0){
-      return(<div>Create an Order to Get Started</div>);
+    if(!_.some(this.props.orders)){
+      return(<div><h6 className="instructions">Create an Order to Get Started</h6></div>);
     }else{
       const orders = this.props.orders;
       let openOrderCount = 0;
@@ -68,16 +68,14 @@ class OrderList extends Component {
             alert('alert the manager');
           }
           return (
-            <div  key={order.id}>
-              <li className="order">
-                <div className="order-details">
+            <li className="order" key={order.id}>
+                <div className="order-details h5">
                   <span className="order-number">Order#: {order.id} </span>
-                  <span className="total">Total: ${order.total}</span>
+                  <span className="total">Total: <span className="price">${order.total}</span></span>
                 </div>
-              </li>
               <div className="order-controls">
                 <button
-                  className="btn btn-primary"
+                  className="btn btn-success"
                   onClick={() => this.props.updateOrder(order, 'fulfill')}>
                   Fulfill
                 </button>
@@ -87,15 +85,14 @@ class OrderList extends Component {
                   Cancel
                 </button>
               </div>
-              <ul className="order-items">
+              <ul className="order-items list-inline">
                {this.renderOrderItems(order)}
               </ul>
-              <h3>Add Items</h3>
-              <hr />
-              <ul className="menu-items">
+              <h4>Add Items to Order</h4>
+              <ul className="menu-items list-inline">
                 {this.renderMenuItems(this.props.menuItems, order)}
               </ul>
-            </div>
+            </li>
           );
         }
       });
@@ -103,16 +100,17 @@ class OrderList extends Component {
   }
   render() {
     return (
-      <div className="container-fluid">
-        <h3>Open Orders</h3>
+      <div>
         <button
           onClick={this.handleNewOrderClick.bind(this)}
           className="btn btn-primary">
           Create New Order
         </button>
-        <ul className="order-list">
+        <h4>Open Orders</h4>
+        <ul className="order-list list-unstyled">
           {this.renderOrderList()}
         </ul>
+
       </div>
     );
   }

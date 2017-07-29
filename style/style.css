@@ -1,0 +1,51 @@
+.order{
+  background: #eee;
+  padding: 0 1em 1em;
+  margin-top: 1em;
+  border: 1px solid #ddd;
+}
+#app-container .navbar-nav{
+  margin-left: 0;
+}
+#app-container .navbar{
+  margin-bottom: 0;
+}
+#app-container .btn{
+  border-radius: 0;
+}
+#app-container .list-inline{
+  margin-left: 0;
+}
+.instructions{
+  font-style: italic;
+  color: #888;
+}
+
+.price{
+  color: #09f;
+  font-size: 1.4em;
+}
+.order .order-item{
+  margin-top: 1em;
+  border: 1px solid #ddd;
+  padding: 0;
+  padding-left: 4px;
+  margin-right: .5em;
+  background: #fff;
+}
+.order-item .btn{
+  margin-left: .5em;
+}
+.order-controls .btn{
+  margin-right: 1em;
+}
+.menu-items .menu-item{
+  border: 1px solid #ddd;
+  padding: 0;
+  padding-left: 4px;
+  margin: 0 .5em .5em 0;
+  background: #fff;
+}
+.menu-items .btn {
+  margin-left: .5em;
+}

@@ -52,9 +52,6 @@ npm run test:watch
   ]
 }
 ```
-### Wireframes
-![app wireframe](https://github.com/gabeshaughnessy/Drive-Thru/blob/master/wireframes/wireframe.jpg?raw=true)
-
 
 ### TODO:
 - [ ] update tests

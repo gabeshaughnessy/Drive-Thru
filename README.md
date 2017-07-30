@@ -14,11 +14,25 @@ Clone this directory, then do
 npm install
 
 ```
-To run the app, do
+
+Next you need to set up your config file. This has the settings for your management server, which handles notifications for the management, as well as your restaurant settings. This is where you can add menu items and name your restaurant.
+
+``` cp sample-config.js config.js ```
+
+Edit config.js and make any necessary changes.
+
+### Running the management server
+To run the management server do
+``` node mgmt-server.js ```
+
+### Running the P.O.S. App
+First make sure your management server is up and running, then to run the point of sale app open a new terminal window and do
+
 ```
 npm start
 ```
-The app is now running on port 8080. Visit http://localhost:8080 to start taking orders
+
+The P.O.S. app is now running on port 8080. Visit http://localhost:8080 to start taking orders
 
 To test the app, do
 ```
@@ -51,7 +65,12 @@ npm run test:watch
       name : String,
       price : Number
     }
-  ]
+  ],
+  notifications : {
+    message : "String",
+    warning : Boolean,
+    orderCount : Number
+  }
 }
 ```
 ![app screenshot](https://github.com/gabeshaughnessy/Drive-Thru/blob/master/wireframes/app-screenshot.jpg?raw=true)

@@ -21,7 +21,7 @@ class OrderList extends Component {
             key={item.name}>
             <span className="item-name">{item.name}</span>
             <button
-              className="btn btn-secondary"
+              className="btn btn-default"
               onClick={()=>{this.props.addItem(order, item)}}>
               +
             </button>
@@ -100,9 +100,9 @@ class OrderList extends Component {
 
           let cookingStatus = '';
           if(order.status == 'cooking'){
-            cookingStatus = <span className="cooking">Cooking</span>
+            cookingStatus = <span className="cooking bg-primary">Cooking</span>
           }else if (order.status == 'updated') {
-            cookingStatus = <span className="cooking">Updated</span>
+            cookingStatus = <span className="cooking text-warning bg-warning">Updated</span>
           }
 
 
@@ -112,7 +112,7 @@ class OrderList extends Component {
               <div className="order-details h5">
                 {cookingStatus}
                 <span className="order-number">Order#: {order.id} </span>
-                <span className="total">Total: <span className="price">${order.total}</span></span>
+                <span className="total">Total: <span className="price">${order.total.toFixed(2)}</span></span>
                 <span className="created-at">Created at: <span className={orderTimeClass}>{order.createdAt.toLocaleTimeString()}</span></span>
               </div>
               <div className="order-controls">

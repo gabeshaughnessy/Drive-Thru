@@ -1,11 +1,15 @@
+import config from '../../config';
 export default function(state=[], action){
+  if(config.menu_items.length > 0){
+    return config.menu_items
+  }
+  //default menu items if you are lazy
   return [
-    {name: 'Slow Roll', price: 2.25},
-    {name: 'Slow Bowl', price: 2.25},
+    {name: 'Burger', price: 2.25},
+    {name: 'Cheeseburger', price: 2.25},
     {name: 'Salad', price: 2.5},
-    {name: 'Chicharones', price: 2.5},
-    {name: 'Michelada', price: 2.5},
-    {name: 'Margarita', price: 4}
-
+    {name: 'Fries', price: 2.5},
+    {name: 'Fountain Drink', price: 2.5},
+    {name: 'Milk Shake', price: 4}
   ]
 }

@@ -10,8 +10,19 @@ app.use(morgan('combined'));
 app.use(bodyParser.json());
 
 app.post('/', function(req, res){
-  const message = "Management has been notified of " + req.body.orders +" open orders.";
-  res.json({"message": message});
+  let message = '';
+  let warning = req.body.warning;
+  if(req.body.warning == true && req.body.orders >= 5){
+    message = "Management has been notified of " + req.body.orders +" open orders.";
+  }else if(req.body.orders >= 4){
+    warning = true;
+    message = "Nice job getting caught up on orders!";
+  }else{
+    warning = false;
+    message = "";
+  }
+
+  res.json({"message": message, "warning": warning, "orderCount": req.body.orders});
 });
 
 const port = process.env.PORT || 3090

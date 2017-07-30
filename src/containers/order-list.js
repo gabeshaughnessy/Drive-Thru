@@ -58,16 +58,34 @@ class OrderList extends Component {
     if(!_.some(this.props.orders)){
       return(<div><h6 className="instructions">Create an Order to Get Started</h6></div>);
     }else{
-      const orders = this.props.orders;
-      let openOrderCount = 0;
-      return Object.keys(orders).map((i)=>{
-        const order = orders[i];
-        const openStatus = ['open', 'cooking', 'updated'];
-        if(openStatus.indexOf(order.status) !== -1){
-          openOrderCount++;
-          if(openOrderCount > 4 && Object.keys(this.props.notifications).length == 0 ){
-                this.props.notifyManager(openOrderCount);
+
+      const openStatus = ['open', 'cooking', 'updated'];
+
+      function countOpenOrders(orders) {
+        var count = 0;
+        for (var order in orders){
+          if(openStatus.indexOf(orders[order].status) !== -1){
+            count++;
           }
+        }
+        return count;
+      };
+
+      const openOrders = countOpenOrders(this.props.orders);
+
+      if(openOrders > 4 && openOrders !== this.props.notifications.orderCount ){
+        this.props.notifyManager(openOrders);
+      }else if(this.props.notifications.warning == true && openOrders !== this.props.notifications.orderCount){
+        this.props.notifyManager(openOrders);
+      }
+
+      return Object.keys(this.props.orders).map((i)=>{
+        const order = this.props.orders[i];
+
+        if(openStatus.indexOf(order.status) !== -1){
+
+
+
 
 
           //get the orders out before n seconds have passed
@@ -78,6 +96,8 @@ class OrderList extends Component {
           }else if(orderAge > 10){
             orderTimeClass = 'time warning';
           }
+
+
           let cookingStatus = '';
           if(order.status == 'cooking'){
             cookingStatus = <span className="cooking">Cooking</span>
@@ -136,8 +156,16 @@ class OrderList extends Component {
   }
   render() {
     let notification = '';
-    if(Object.keys(this.props.notifications).length > 0){
-      notification = <p className="bg-warning">{this.props.notifications.message}</p>;
+    if(Object.keys(this.props.notifications).length > 0 && this.props.notifications.message !== "" ){
+      let warningClass = "";
+      if(this.props.notifications.orderCount == 5){
+        warningClass = "notification text-warning bg-warning";
+      }else if (this.props.notifications.orderCount > 5) {
+        warningClass = "notification text-danger bg-danger";
+      }else if (this.props.notifications.orderCount == 4) {
+        warningClass = "notification text-success bg-success";
+      }
+      notification = <p className={warningClass}>{this.props.notifications.message}</p>;
     }
     return (
       <div>

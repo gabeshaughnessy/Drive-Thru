@@ -20,7 +20,9 @@
   font-style: italic;
   color: #888;
 }
-
+.notification{
+  padding: .5em;
+}
 .created-at {
   float: right;
   color: #999;

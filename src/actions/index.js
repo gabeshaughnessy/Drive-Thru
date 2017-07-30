@@ -5,7 +5,6 @@ export const UPDATE_ORDER = 'update_order';
 export const ADD_ITEM = 'add_item';
 export const REMOVE_ITEM = 'remove_item';
 export const NOTIFY_MANAGER = 'notify_manager';
-export const CLEAR_NOTIFICATIONS = 'clear_notifications';
 
 //create a new order
 export function createOrder(id){
@@ -47,17 +46,18 @@ export function removeItem(order, item){
 }
 
 export function notifyManager(orderCount){
-  const request = axios.post('http://localhost:3090',{"orders" : orderCount });
+  let warning = false;
+  if(orderCount >= 5){
+    warning = true;
+  }
+  else if(orderCount < 5){
+    warning = false;
+  }
+
+  const request = axios.post('http://localhost:3090',{"orders" : orderCount, "warning" : warning });
   return {
     type: NOTIFY_MANAGER,
     payload: request
-  }
-
-}
-
-export function clearNotifications(){
-  return {
-    type: CLEAR_NOTIFICATIONS
   }
 
 }

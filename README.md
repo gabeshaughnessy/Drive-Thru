@@ -12,18 +12,20 @@ A Drive Through Ordering System
 Clone this directory, then do
 ```
 npm install
-
 ```
 
-Next you need to set up your config file. This has the settings for your management server, which handles notifications for the management, as well as your restaurant settings. This is where you can add menu items and name your restaurant.
+Next you need to set up your config file. This has the settings for your management server as well as your restaurant settings. This is also where you can add menu items and name your restaurant.
 
 ``` cp sample-config.js config.js ```
 
 Edit config.js and make any necessary changes.
 
-### Running the management server
+### Running the Management Server
+The management server handles notifications to the management, and must be running while the P.O.S app is running.
 To run the management server do
-``` node mgmt-server.js ```
+```
+ node mgmt-server.js
+```
 
 ### Running the P.O.S. App
 First make sure your management server is up and running, then to run the point of sale app open a new terminal window and do
@@ -34,7 +36,7 @@ npm start
 
 The P.O.S. app is now running on port 8080. Visit http://localhost:8080 to start taking orders
 
-To test the app, do
+To test the app, open a new terminal window and do
 ```
 npm run test
 ```

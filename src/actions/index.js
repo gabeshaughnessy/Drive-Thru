@@ -48,10 +48,11 @@ export function removeItem(order, item){
 
 export function notifyManager(orderCount){
   let warning = false;
-  if(orderCount >= 5){
+  const threshold = config.threshold || 4
+  if(orderCount > threshold){
     warning = true;
   }
-  else if(orderCount < 5){
+  else if(orderCount <= threshold){
     warning = false;
   }
   const url = (config.mgmt_server_host || "http://localhost") + ':' + (config.mgmt_server_port || "3090");

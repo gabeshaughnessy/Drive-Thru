@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import * as actions from '../actions';
 import _ from 'lodash';
+import config from '../../config';
 
 class OrderList extends Component {
 
@@ -72,8 +73,9 @@ class OrderList extends Component {
       };
 
       const openOrders = countOpenOrders(this.props.orders);
+      const threshold = config.threshold || 4;
 
-      if(openOrders > 4 && openOrders !== this.props.notifications.orderCount ){
+      if(openOrders > threshold && openOrders !== this.props.notifications.orderCount ){
         this.props.notifyManager(openOrders);
       }else if(this.props.notifications.warning == true && openOrders !== this.props.notifications.orderCount){
         this.props.notifyManager(openOrders);
@@ -156,13 +158,14 @@ class OrderList extends Component {
   }
   render() {
     let notification = '';
+    const threshold = config.threshold || 4;
     if(Object.keys(this.props.notifications).length > 0 && this.props.notifications.message !== "" ){
       let warningClass = "";
-      if(this.props.notifications.orderCount == 5){
+      if(this.props.notifications.orderCount == threshold + 1){
         warningClass = "notification text-warning bg-warning";
-      }else if (this.props.notifications.orderCount > 5) {
+      }else if (this.props.notifications.orderCount > threshold + 1) {
         warningClass = "notification text-danger bg-danger";
-      }else if (this.props.notifications.orderCount == 4) {
+      }else if (this.props.notifications.orderCount == threshold) {
         warningClass = "notification text-success bg-success";
       }
       notification = <p className={warningClass}>{this.props.notifications.message}</p>;

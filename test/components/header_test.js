@@ -8,7 +8,7 @@ describe('Header', () =>{
   });
 
   it('displays the h1', () => {
-    expect(component.find('h1')).to.contain('Drive-Thru');
+    expect(component.find('h3')).to.exist;
   });
 
 });

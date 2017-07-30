@@ -67,13 +67,31 @@ class OrderList extends Component {
           if(openOrderCount > 4){
             alert('alert the manager');
           }
+
+          //get the orders out before n seconds have passed
+          const orderAge = new Date().getSeconds() - order.createdAt.getSeconds();
+          let orderTimeClass = 'time';
+          if(orderAge > 20){
+            orderTimeClass = 'time danger';
+          }else if(orderAge > 10){
+            orderTimeClass = 'time warning';
+          }
+
+
           return (
             <li className="order" key={order.id}>
-                <div className="order-details h5">
-                  <span className="order-number">Order#: {order.id} </span>
-                  <span className="total">Total: <span className="price">${order.total}</span></span>
-                </div>
+              <div className="order-details h5">
+                <span className="order-number">Order#: {order.id} </span>
+                <span className="total">Total: <span className="price">${order.total}</span></span>
+                <span className="created-at">Created at: <span className={orderTimeClass}>{order.createdAt.toLocaleTimeString()}</span></span>
+
+              </div>
               <div className="order-controls">
+                <button
+                  className="btn btn-primary"
+                  >
+                  Send to Cooks
+                </button>
                 <button
                   className="btn btn-success"
                   onClick={() => this.props.updateOrder(order, 'fulfill')}>
@@ -106,6 +124,7 @@ class OrderList extends Component {
           className="btn btn-primary">
           Create New Order
         </button>
+        {console.log(this.props)}
         <h4>Open Orders</h4>
         <ul className="order-list list-unstyled">
           {this.renderOrderList()}

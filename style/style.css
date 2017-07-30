@@ -21,6 +21,18 @@
   color: #888;
 }
 
+.created-at {
+  float: right;
+  color: #999;
+  font-style: italic;
+}
+.time.warning{
+  color: #eb9316;
+}
+.time.danger{
+  color: #c12e2a;
+}
+
 .price{
   color: #09f;
   font-size: 1.4em;

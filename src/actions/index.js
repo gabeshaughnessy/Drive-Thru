@@ -5,11 +5,13 @@ export const REMOVE_ITEM = 'remove_item';
 
 //create a new order
 export function createOrder(id){
+  const currentTime = new Date();
   const order = {
     id : id,
     items : {},
     total : 0,
-    status : 'open'
+    status : 'open',
+    createdAt : currentTime
   }
   return {
     type : CREATE_ORDER,

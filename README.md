@@ -18,6 +18,8 @@ To run the app, do
 ```
 npm start
 ```
+The app is now running on port 8080. Visit http://localhost:8080 to start taking orders
+
 To test the app, do
 ```
 npm run test

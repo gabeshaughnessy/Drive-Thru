@@ -33,15 +33,6 @@ class Order extends Component {
   render(){
     const order = this.props.order;
 
-    //order age
-    const orderAge = new Date().getSeconds() - order.createdAt.getSeconds();
-    let orderTimeClass = 'time';
-    if(orderAge > 20){
-      orderTimeClass = 'time danger';
-    }else if(orderAge > 10){
-      orderTimeClass = 'time warning';
-    }
-
     //cooking status
     let cookingStatus = '';
     if(order.status == 'cooking'){
@@ -55,7 +46,7 @@ class Order extends Component {
           {cookingStatus}
           <span className="order-number">Order#: {order.id} </span>
           <span className="total">Total: <span className="price">${order.total.toFixed(2)}</span></span>
-          <span className="created-at">Created at: <span className={orderTimeClass}>{order.createdAt.toLocaleTimeString()}</span></span>
+          <span className="created-at">Created at: <span className="time">{order.createdAt.toLocaleTimeString()}</span></span>
         </div>
         <OrderControls order={order} />
         <ul className="order-items list-inline">

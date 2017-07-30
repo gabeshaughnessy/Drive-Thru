@@ -4,6 +4,7 @@ import * as actions from '../actions';
 import MenuItem from './menu-item';
 import OrderItem from './order-item';
 import OrderControls from './order-controls';
+import _ from 'lodash';
 
 class Order extends Component {
 
@@ -46,7 +47,7 @@ class Order extends Component {
           {cookingStatus}
           <span className="order-number">Order#: {order.id} </span>
           <span className="total">Total: <span className="price">${order.total.toFixed(2)}</span></span>
-          <span className="created-at">Created at: <span className="time">{order.createdAt.toLocaleTimeString()}</span></span>
+          <span className="created-at">Created at: <span className="time">{order.createdAt}</span></span>
         </div>
         <OrderControls order={order} />
         <ul className="order-items list-inline">

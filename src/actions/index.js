@@ -9,7 +9,7 @@ export const NOTIFY_MANAGER = 'notify_manager';
 
 //create a new order
 export function createOrder(id){
-  const currentTime = new Date();
+  const currentTime = new Date().toLocaleTimeString();
   const order = {
     id : id,
     items : {},

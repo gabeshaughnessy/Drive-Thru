@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const app = express();
 const morgan = require('morgan');
 const config = require('./config');
+const threshold = config.threshold || 4;
 
 app.use(cors());
 app.use(morgan('combined'));
@@ -13,9 +14,9 @@ app.use(bodyParser.json());
 app.post('/', function(req, res){
   let message = '';
   let warning = req.body.warning;
-  if(req.body.warning == true && req.body.orders >= 5){
+  if(req.body.warning == true && req.body.orders > threshold){
     message = "Management has been notified of " + req.body.orders +" open orders.";
-  }else if(req.body.orders >= 4){
+  }else if(req.body.orders >= threshold){
     warning = true;
     message = "Nice job getting caught up on orders!";
   }else{

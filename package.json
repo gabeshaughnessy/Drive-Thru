@@ -26,14 +26,21 @@
     "webpack-dev-server": "^1.14.0"
   },
   "dependencies": {
+    "axios": "^0.16.2",
     "babel-preset-stage-1": "^6.1.18",
+    "body-parser": "^1.17.2",
+    "cors": "^2.8.4",
+    "express": "^4.15.3",
+    "http": "0.0.0",
     "immutability-helper": "^2.3.0",
     "lodash": "^3.10.1",
+    "morgan": "^1.8.2",
     "react": "^0.14.3",
     "react-dom": "^0.14.3",
     "react-redux": "4.3.0",
     "react-router": "^2.0.1",
     "redux": "^3.0.4",
-    "redux-form": "^7.0.3"
+    "redux-form": "^7.0.3",
+    "redux-promise": "^0.5.3"
   }
 }

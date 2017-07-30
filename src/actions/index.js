@@ -1,7 +1,11 @@
+import axios from 'axios';
+
 export const CREATE_ORDER = 'create_order';
 export const UPDATE_ORDER = 'update_order';
 export const ADD_ITEM = 'add_item';
 export const REMOVE_ITEM = 'remove_item';
+export const NOTIFY_MANAGER = 'notify_manager';
+export const CLEAR_NOTIFICATIONS = 'clear_notifications';
 
 //create a new order
 export function createOrder(id){
@@ -41,6 +45,19 @@ export function removeItem(order, item){
     payload: {order, item}
   }
 }
-//add an item to an order
 
-//remove an item from an order
+export function notifyManager(orderCount){
+  const request = axios.post('http://localhost:3090',{"orders" : orderCount });
+  return {
+    type: NOTIFY_MANAGER,
+    payload: request
+  }
+
+}
+
+export function clearNotifications(){
+  return {
+    type: CLEAR_NOTIFICATIONS
+  }
+
+}

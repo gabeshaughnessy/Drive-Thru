@@ -65,8 +65,8 @@ class OrderList extends Component {
         const openStatus = ['open', 'cooking', 'updated'];
         if(openStatus.indexOf(order.status) !== -1){
           openOrderCount++;
-          if(openOrderCount > 4){
-            alert('alert the manager');
+          if(openOrderCount > 4 && Object.keys(this.props.notifications).length == 0 ){
+                this.props.notifyManager(openOrderCount);
           }
 
 
@@ -135,6 +135,10 @@ class OrderList extends Component {
     }
   }
   render() {
+    let notification = '';
+    if(Object.keys(this.props.notifications).length > 0){
+      notification = <p className="bg-warning">{this.props.notifications.message}</p>;
+    }
     return (
       <div>
         <button
@@ -142,8 +146,8 @@ class OrderList extends Component {
           className="btn btn-primary">
           Create New Order
         </button>
-        {console.log(this.props)}
         <h4>Open Orders</h4>
+        {notification}
         <ul className="order-list list-unstyled">
           {this.renderOrderList()}
         </ul>
@@ -156,7 +160,8 @@ function mapStateToProps(state){
 
   return {
     orders: state.orders,
-    menuItems : state.menuItems
+    menuItems : state.menuItems,
+    notifications : state.notifications
   }
 }
 

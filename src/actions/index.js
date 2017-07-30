@@ -1,4 +1,5 @@
 import axios from 'axios';
+import config from '../../config';
 
 export const CREATE_ORDER = 'create_order';
 export const UPDATE_ORDER = 'update_order';
@@ -53,8 +54,8 @@ export function notifyManager(orderCount){
   else if(orderCount < 5){
     warning = false;
   }
-
-  const request = axios.post('http://localhost:3090',{"orders" : orderCount, "warning" : warning });
+  const url = (config.mgmt_server_host || "http://localhost") + ':' + (config.mgmt_server_port || "3090");
+  const request = axios.post(url,{"orders" : orderCount, "warning" : warning });
   return {
     type: NOTIFY_MANAGER,
     payload: request

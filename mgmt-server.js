@@ -4,6 +4,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const app = express();
 const morgan = require('morgan');
+const config = require('./config');
 
 app.use(cors());
 app.use(morgan('combined'));
@@ -25,7 +26,7 @@ app.post('/', function(req, res){
   res.json({"message": message, "warning": warning, "orderCount": req.body.orders});
 });
 
-const port = process.env.PORT || 3090
+const port = config.mgmt_server_port || 3090
 const server = http.createServer(app);
 server.listen(port);
 

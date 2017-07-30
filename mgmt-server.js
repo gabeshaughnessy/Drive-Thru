@@ -12,6 +12,9 @@ app.use(morgan('combined'));
 app.use(bodyParser.json());
 
 app.post('/', function(req, res){
+  //this is where the management server could send out a message via bluetooth or sms
+  //for now we are just pretending it is sending some sort of notification and returning a message.
+
   let message = '';
   let warning = req.body.warning;
   if(req.body.warning == true && req.body.orders > threshold){
@@ -31,4 +34,4 @@ const port = config.mgmt_server_port || 3090
 const server = http.createServer(app);
 server.listen(port);
 
-console.log('management server listening on: ',  port);
+console.log('You may now use the P.O.S. app, the management server is listening on: ',  port);

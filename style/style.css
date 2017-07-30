@@ -37,6 +37,14 @@
   color: #09f;
   font-size: 1.4em;
 }
+.cooking{
+  margin-right: .5em;
+  background: #eb9316;
+  padding: 2px 4px;
+  font-size: 1em;
+  color: #fff;
+}
+
 .order .order-item{
   margin-top: 1em;
   border: 1px solid #ddd;

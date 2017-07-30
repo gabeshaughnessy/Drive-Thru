@@ -62,11 +62,13 @@ class OrderList extends Component {
       let openOrderCount = 0;
       return Object.keys(orders).map((i)=>{
         const order = orders[i];
-        if(order.status === 'open'){
+        const openStatus = ['open', 'cooking', 'updated'];
+        if(openStatus.indexOf(order.status) !== -1){
           openOrderCount++;
           if(openOrderCount > 4){
             alert('alert the manager');
           }
+
 
           //get the orders out before n seconds have passed
           const orderAge = new Date().getSeconds() - order.createdAt.getSeconds();
@@ -76,25 +78,41 @@ class OrderList extends Component {
           }else if(orderAge > 10){
             orderTimeClass = 'time warning';
           }
+          let cookingStatus = '';
+          if(order.status == 'cooking'){
+            cookingStatus = <span className="cooking">Cooking</span>
+          }else if (order.status == 'updated') {
+            cookingStatus = <span className="cooking">Updated</span>
+          }
+
 
 
           return (
             <li className="order" key={order.id}>
               <div className="order-details h5">
+                {cookingStatus}
                 <span className="order-number">Order#: {order.id} </span>
                 <span className="total">Total: <span className="price">${order.total}</span></span>
                 <span className="created-at">Created at: <span className={orderTimeClass}>{order.createdAt.toLocaleTimeString()}</span></span>
-
               </div>
               <div className="order-controls">
                 <button
                   className="btn btn-primary"
-                  >
-                  Send to Cooks
+                  onClick={() => {
+                    if(order.status == 'cooking'){
+                      this.props.updateOrder(order, 'updated')
+                    }else if(Object.keys(order.items).length > 0){
+                      this.props.updateOrder(order, 'cooking')
+                    }else{
+                      alert('you must add at least one item to the order');
+                    }
+                  }} >
+                  {(order.status == 'open')? 'Send to Cooks' :'Update Order'}
+
                 </button>
                 <button
                   className="btn btn-success"
-                  onClick={() => this.props.updateOrder(order, 'fulfill')}>
+                  onClick={() => this.props.updateOrder(order, 'fulfilled')}>
                   Fulfill
                 </button>
                 <button

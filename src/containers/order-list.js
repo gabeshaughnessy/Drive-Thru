@@ -6,13 +6,6 @@ import config from '../../config';
 
 class OrderList extends Component {
 
-  handleNewOrderClick = function(event){
-    const size = Object.keys(this.props.orders).length;
-    const id = size+1;
-    this.props.createOrder(id);
-
-  }
-
   renderMenuItems(items, order){
     if(items.length > 0){
       return items.map((item)=>{
@@ -171,12 +164,7 @@ class OrderList extends Component {
       notification = <p className={warningClass}>{this.props.notifications.message}</p>;
     }
     return (
-      <div>
-        <button
-          onClick={this.handleNewOrderClick.bind(this)}
-          className="btn btn-primary">
-          Create New Order
-        </button>
+      <div className="order-container">
         <h4>Open Orders</h4>
         {notification}
         <ul className="order-list list-unstyled">

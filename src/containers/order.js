@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import * as actions from '../actions';
+import MenuItem from './menu-item';
 
 class Order extends Component {
 
@@ -8,16 +9,7 @@ class Order extends Component {
     if(items.length > 0){
       return items.map((item)=>{
         return (
-          <li
-            className="item menu-item"
-            key={item.name}>
-            <span className="item-name">{item.name}</span>
-            <button
-              className="btn btn-default"
-              onClick={()=>{this.props.addItem(order, item)}}>
-              +
-            </button>
-          </li>
+          <MenuItem order={order} item={item} key={item.name}/>
         );
       });
     }

@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import * as actions from '../actions';
 import MenuItem from './menu-item';
+import OrderItem from './order-item';
+import OrderControls from './order-controls';
 
 class Order extends Component {
 
@@ -21,17 +23,7 @@ class Order extends Component {
       return Object.keys(order.items).map((i)=>{
         const item = order.items[i];
         return (
-          <li
-            className="item order-item"
-            key={item.name}>
-            <span className="item-name">{item.name} - </span>
-            <span className="item-qty">qty: {item.qty}</span>
-            <button
-              className="btn btn-warning"
-              onClick={()=>{this.props.removeItem(order, item);}}>
-              &times;
-            </button>
-          </li>
+          <OrderItem order={order} item={item} key={item.name}/>
         );
       });
     }
@@ -40,7 +32,8 @@ class Order extends Component {
 
   render(){
     const order = this.props.order;
-    //get the orders out before n seconds have passed
+
+    //order age
     const orderAge = new Date().getSeconds() - order.createdAt.getSeconds();
     let orderTimeClass = 'time';
     if(orderAge > 20){
@@ -49,7 +42,7 @@ class Order extends Component {
       orderTimeClass = 'time warning';
     }
 
-
+    //cooking status
     let cookingStatus = '';
     if(order.status == 'cooking'){
       cookingStatus = <span className="cooking bg-primary">Cooking</span>
@@ -64,32 +57,7 @@ class Order extends Component {
           <span className="total">Total: <span className="price">${order.total.toFixed(2)}</span></span>
           <span className="created-at">Created at: <span className={orderTimeClass}>{order.createdAt.toLocaleTimeString()}</span></span>
         </div>
-        <div className="order-controls">
-          <button
-            className="btn btn-primary"
-            onClick={() => {
-              if(order.status == 'cooking'){
-                this.props.updateOrder(order, 'updated')
-              }else if(Object.keys(order.items).length > 0){
-                this.props.updateOrder(order, 'cooking')
-              }else{
-                alert('you must add at least one item to the order');
-              }
-            }} >
-            {(order.status == 'open')? 'Send to Cooks' :'Update Order'}
-
-          </button>
-          <button
-            className="btn btn-success"
-            onClick={() => this.props.updateOrder(order, 'fulfilled')}>
-            Fulfill
-          </button>
-          <button
-            className="btn btn-danger"
-            onClick={() => this.props.updateOrder(order, 'canceled')}>
-            Cancel
-          </button>
-        </div>
+        <OrderControls order={order} />
         <ul className="order-items list-inline">
          {this.renderOrderItems(order)}
         </ul>

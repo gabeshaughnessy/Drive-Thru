@@ -18,7 +18,7 @@ Next you need to set up your config file. This has the settings for your managem
 
 ``` cp sample-config.js config.js ```
 
-Edit config.js and make any necessary changes.
+Edit `config.js` and make any necessary changes.
 
 #### Running the Management Server
 The management server handles notifications to the management, and must be running while the P.O.S. app is running.
@@ -34,7 +34,7 @@ First make sure your management server is up and running, then to run the point 
 npm start
 ```
 
-The P.O.S. app is now running on port 8080. Visit http://localhost:8080 to start taking orders
+The P.O.S. app is now running on port `8080`. Visit `http://localhost:8080` to start taking orders
 
 #### Testing
 To test the app, open a new terminal window and do

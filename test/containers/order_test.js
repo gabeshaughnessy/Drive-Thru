@@ -8,7 +8,7 @@ describe('Order', ()=>{
     component = renderComponent(Order, props);
   });
 
-  it('renders something', ()=>{
+  it('renders an order', ()=>{
     expect(component).to.have.class('order');
   });
 

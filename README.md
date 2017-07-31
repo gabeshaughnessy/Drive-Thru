@@ -77,6 +77,3 @@ npm run test:watch
 }
 ```
 ![app screenshot](https://github.com/gabeshaughnessy/Drive-Thru/blob/master/wireframes/app-screenshot.jpg?raw=true)
-
-#### TODO:
-- [ ] update tests
